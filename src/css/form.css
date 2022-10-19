@@ -25,17 +25,13 @@ form input {
   border-radius: 6px;
   height: 41px;
   padding-inline: 1.2rem;
-
   width: 100%;
-
   color: white;
-  text-transform: uppercase;
 }
 
 form .flex {
   gap: 1.4rem;
 }
-
 form .flex .input-wrapper {
   flex: 1;
 }
