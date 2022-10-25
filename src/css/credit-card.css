@@ -1,11 +1,10 @@
 /* CC */
 .cc {
-  background: no-repeat center/cover;
+  background: no-repeat;
   background-image: url("/cc-bg.svg");
-  width: 36rem;
-  height: 23rem;
+  height: 36rem;
+  width: 23rem;
   padding: 2rem;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -23,11 +22,9 @@
 }
 
 .cc-number {
-  font-size: 2.4rem;
-  font-weight: bold;
+  font-size: 1.6rem;
   line-height: 2.9rem;
   letter-spacing: 0.04em;
-
   color: #e8e8e8;
   text-shadow: 0 0.12rem 0.32rem rgb(23 23 23 / 40%);
 }

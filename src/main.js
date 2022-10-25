@@ -3,18 +3,27 @@ import IMask from "imask"
 
 const ccBgColor01 = document.querySelector(".cc-bg svg > g g:nth-child(1) path")
 const ccBgColor02 = document.querySelector(".cc-bg svg > g g:nth-child(2) path")
+const ccBgColor03 = document.querySelector(".cc-bg svg > g g:nth-child(3) path")
+const ccBg = document.querySelector(".cc")
+
 const ccLogo = document.querySelector(".cc-logo span:nth-child(2) img")
 
 function setCardType(type) {
   const colors = {
-    visa: ["#436D99", "#2D57F2"],
-    mastercard: ["#DF6F29", "#C69347"],
-    rocketseat: ["#0D6F5D", "#C3129C"],
-    default: ["black", "gray"],
+    visa: ["#2D57F2", "#436D99", "#084B8A", "#2D57F2"],
+    mastercard: ["#DF6F29", "#C69347", "#B45F04", "#DF6F29"],
+    default: ["black", "#000", "#000", "#363636"],
+    elo: ["#1E90FF", "#FFFF00", "#DF6F29", "#1E90FF"],
+    american: ["#00BFFF", "#4682B4", "#2D57F2", "#00BFFF"],
+    nubank: ["#8B008B", "#8A2BE2", "#500061", "#8B008B"],
   }
 
   ccBgColor01.setAttribute("fill", colors[type][0])
   ccBgColor02.setAttribute("fill", colors[type][1])
+  ccBgColor03.setAttribute("fill", colors[type][2])
+  ccBg.style.backgroundColor = colors[type][3]
+  ccBg.style.borderRadius = "20px"
+
   ccLogo.setAttribute("src", `cc-${type}.svg`)
 }
 
@@ -50,16 +59,31 @@ const cardNumberPattern = {
     {
       mask: "0000 0000 0000 0000",
       regex: /^4\d{0,15}/,
-      cardtype: "visa",
+      cardtipo: "visa",
     },
     {
       mask: "0000 0000 0000 0000",
-      regex: /(^5[1-5]\d{0,2}|^22[2-9]\d|^2[3-7]\d{0,2})\d{0,12}/,
-      cardtype: "mastercard",
+      regex: /^(5[1-5]\d{0,2}|22[2-9]\d{0,1}|2[3-7]\d{0,2})\d{0,12}/,
+      cardtipo: "mastercard",
     },
     {
       mask: "0000 0000 0000 0000",
-      cardtype: "default",
+      regex: /^(5|6)\d{0,15}/,
+      cardtipo: "elo",
+    },
+    {
+      mask: "0000 0000 0000 0000",
+      cardtipo: "default",
+    },
+    {
+      mask: "0000 000000 00000",
+      regex: /^3[4-7]\d{0,13}/,
+      cardtype: "american",
+    },
+    {
+      mask: "0000 000000 00000",
+      regex: /^2[7-9]\d{0,13}/,
+      cardtype: "nubank",
     },
   ],
   dispatch: function (appended, dynamicMasked) {
@@ -85,7 +109,7 @@ const cardHolder = document.querySelector("#card-holder")
 cardHolder.addEventListener("input", () => {
   const ccHolder = document.querySelector(".cc-holder .value")
   ccHolder.innerText =
-    cardHolder.value.length === 0 ? "Aqui vai seu Nome" : cardHolder.value
+    cardHolder.value.length === 0 ? "Nome do Titular" : cardHolder.value
 })
 
 securityCodeMasked.on("accept", () => {
